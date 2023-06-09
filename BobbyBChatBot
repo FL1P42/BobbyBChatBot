@@ -3,12 +3,12 @@ from matrix_client.client import MatrixClient
 from random import choice
 
 # Connect to the Matrix server
-client = MatrixClient("https://matrix.randm.io")
+client = MatrixClient("")
 # Login using the provided credentials
-client.login_with_password(username="@bottyb:matrix.randm.io", password="ebGD4omcB7gM8Hw1fLMR")
+client.login_with_password(username="", password="")
 
 # Join the chat room
-room = client.join_room("!URaZjiwpNQIfYTWkPT:matrix.randm.io")
+room = client.join_room("")
 
 # Function to handle incoming messages
 def handle_message(room, event):
@@ -47,7 +47,7 @@ def handle_message(room, event):
 
 # Function to retrieve a random quote from a URL
 def get_random_quote():
-    url = "https://also.randm.io/quote/random/bobbyb"  # Replace with the actual URL that provides quotes
+    url = ""  # Replace with the actual URL that provides quotes
     try:
         response = requests.get(url)
         if response.status_code == 200:
