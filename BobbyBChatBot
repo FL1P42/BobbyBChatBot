@@ -1,0 +1,70 @@
+import requests
+from matrix_client.client import MatrixClient
+from random import choice
+
+# Connect to the Matrix server
+client = MatrixClient("https://matrix.randm.io")
+# Login using the provided credentials
+client.login_with_password(username="@bottyb:matrix.randm.io", password="ebGD4omcB7gM8Hw1fLMR")
+
+# Join the chat room
+room = client.join_room("!URaZjiwpNQIfYTWkPT:matrix.randm.io")
+
+# Function to handle incoming messages
+def handle_message(room, event):
+    sender = event['sender']
+    body = event['content']['body']
+    print(f"Message from {sender}: {body}")
+
+    # Check if the keyword is mentioned in the message
+    if "Bob" in body:
+        response = get_random_quote()
+        room.send_text(response)
+    if "Bobby" in body:
+            response = get_random_quote()
+            room.send_text(response)
+    if "King Bobby" in body:
+        response = get_random_quote()
+        room.send_text(response)
+    if "Bobby B" in body:
+        response = get_random_quote()
+        room.send_text(response)
+    if "Bobby b" in body:
+        response = get_random_quote()
+        room.send_text(response)
+    if "bob" in body:
+        response = get_random_quote()
+        room.send_text(response)
+    if "bobby" in body:
+        response = get_random_quote()
+        room.send_text(response)
+    if "king bobby" in body:
+        response = get_random_quote()
+        room.send_text(response)
+    if "bobby b" in body:
+        response = get_random_quote()
+        room.send_text(response)
+
+# Function to retrieve a random quote from a URL
+def get_random_quote():
+    url = "https://also.randm.io/quote/random/bobbyb"  # Replace with the actual URL that provides quotes
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            quotes = response.json()
+            random_quote = choice(quotes)
+            return random_quote['q']
+        else:
+            return "Sorry, I couldn't fetch a quote at the moment."
+    except requests.exceptions.RequestException as e:
+        return "Sorry, there was an error while fetching the quote."
+
+# Add event listener for incoming messages
+room.add_listener(handle_message)
+
+# Start the event listener loop
+client.start_listener_thread()
+
+# Keep the program running until interrupted
+while True:
+    pass
